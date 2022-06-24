@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function App() {
+import Add from "./component/Add/Add";
+import Counter from "./component/Counter/Counter";
+import List from "./component/List/List";
+import Edit from "./component/Edit/Edit";
+
+import CounterContextProvaider from "./component/context/CounterContext";
+import TodoContextProvaider from "./component/context/TodoContext";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TodoContextProvaider>
+      <CounterContextProvaider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/counter" element={<Counter />} />
+            <Route path="/add" element={<Add />} />
+            <Route path="/list" element={<List />} />
+            <Route path="/edit/:id" element={<Edit />} />
+          </Routes>
+        </BrowserRouter>
+      </CounterContextProvaider>
+    </TodoContextProvaider>
   );
-}
+};
 
 export default App;
